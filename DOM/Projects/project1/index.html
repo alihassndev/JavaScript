@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Changer | Project 1</title>
+
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .canvas {
+        width: 40rem;
+        height: 30rem;
+        background-color: rgb(210, 210, 210);
+        border-radius: 1rem;
+        box-shadow: 5px 10px 10px 10px rgb(235, 235, 235);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .canvas h2 {
+        margin-top: 0.5rem;
+      }
+      .colors {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+      }
+      #green {
+        width: 5rem;
+        height: 5rem;
+        background-color: green;
+        border-radius: 5px;
+      }
+      #blue {
+        width: 5rem;
+        height: 5rem;
+        background-color: blue;
+        border-radius: 5px;
+      }
+      #white {
+        width: 5rem;
+        height: 5rem;
+        background-color: white;
+        border-radius: 5px;
+      }
+      #yellow {
+        width: 5rem;
+        height: 5rem;
+        background-color: yellow;
+        border-radius: 5px;
+      }
+      .box {
+        border: none;
+        transition: all 0.3s ease;
+      }
+      .box:hover {
+        transform: translateY(-5px);
+        cursor: pointer;
+        border: 1px solid black;
+      }
+      button {
+        margin-top: 1rem;
+        background-color: transparent;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border: 1px solid grey;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+      button:hover {
+        cursor: pointer;
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      <h1>Color Scheme Switcher</h1>
+      <div class="colors">
+        <div class="box" id="green"></div>
+        <div class="box" id="blue"></div>
+        <div class="box" id="white"></div>
+        <div class="box" id="yellow"></div>
+      </div>
+
+      <div class="content">
+        <h2>Try clicking on one of the above color</h2>
+        <h2>to change the background of this page</h2>
+      </div>
+
+      <button class="reload">Reload</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
