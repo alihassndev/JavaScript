@@ -50,3 +50,62 @@
 
 //   //   removeIt.parentNode.removeChild(removeIt);
 // });
+
+// set time out
+
+// console.log(1);
+// setTimeout(() => {
+//   console.log(2);
+// }, 0);
+// console.log(3);
+
+// ============ Part 2 ============
+// Handler => Callback => function oftenly (without name) -> reference
+
+const stop = document.querySelector("#stop");
+const start = document.querySelector("#start");
+let intervalID;
+const sayDate = function () {
+  intervalID = setInterval(
+    (str) => {
+      console.log(str, Date.now());
+    },
+    1000,
+    "Ali Hassan"
+  );
+};
+
+start.addEventListener("click", sayDate);
+
+const stopRun = function () {
+  console.log(`Stopped`);
+  clearInterval(intervalID);
+};
+
+stop.addEventListener("click", stopRun);
+
+// const sayName = function () {
+//   console.log("Ali Hassan");
+// };
+
+// sayName();
+
+// const changeText = function () {
+//   document.querySelector("h1").innerHTML = "Best of luck";
+//   console.log(`${document.querySelector("h1").innerHTML}`);
+// };
+
+// const changeMe = setTimeout(changeText, 2000);
+
+// stop.addEventListener("click", () => {
+//   clearTimeout(changeMe);
+// });
+
+// const sayDate = function (str) {
+//   console.log(str, Date.now());
+// };
+
+// // setInterval(sayDate, 2000);
+// const intervalID = setInterval(sayDate, 2000, `Ali`);
+
+// clearInterval(intervalID);
