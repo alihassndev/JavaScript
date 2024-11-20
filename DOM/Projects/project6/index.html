@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github Profiles</title>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #212121;
+        font-family: Arial, sans-serif;
+        color: #fff;
+      }
+
+      #canvas {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.4rem;
+      }
+
+      #canvas > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        background: #fff;
+        color: #000;
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #ff6b6b;
+      }
+
+      /* Label styling */
+      label {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #212121;
+        transition: 0.3s ease all;
+        pointer-events: none;
+        background: #fff;
+        padding: 0 5px;
+        border-radius: 5px;
+      }
+
+      input:focus + label,
+      input:not(:placeholder-shown) + label {
+        top: -10px;
+        left: 10px;
+        font-size: 14px;
+        color: #ff6b6b;
+      }
+
+      .show {
+        border: none;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        background-color: green;
+        color: white;
+        cursor: pointer;
+      }
+
+      #profile {
+        margin-top: 20px;
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 300px;
+        display: none;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      #profile .img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      #profile h2 {
+        font-size: 1.5rem;
+        margin: 5px 0;
+      }
+
+      #profile p {
+        font-size: 1rem;
+        color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas">
+      <h1>Github Profile</h1>
+
+      <div class="form-group">
+        <input type="text" id="username" placeholder=" " required />
+        <label for="username">Enter Username</label>
+      </div>
+
+      <button class="show">Show Profile</button>
+
+      <div id="profile">
+        <img src="" class="hide img" alt="Profile Picture" />
+        <h2></h2>
+        <p></p>
+      </div>
+    </div>
+
+    <script>
+      const button = document.querySelector(".show");
+
+      const show = function () {
+        const username = document.querySelector("input").value.trim();
+
+        if (!username) {
+          alert("Please enter a GitHub username.");
+          return;
+        }
+
+        const userUrl = `https://api.github.com/users/${username}`;
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("GET", userUrl, true);
+
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+
+            const profileDiv = document.getElementById("profile");
+            const profileImage = profileDiv.querySelector("img");
+
+            // Update profile content
+            profileImage.src = data.avatar_url;
+            profileImage.classList.remove("hide"); // Remove the 'hide' class
+            profileDiv.querySelector("h2").textContent = data.login;
+            profileDiv.querySelector(
+              "p"
+            ).textContent = `Followers: ${data.followers}`;
+
+            // Show the profile card
+            profileDiv.style.display = "block";
+
+            // Clear the input field
+            document.querySelector("input").value = "";
+          } else if (xhr.status === 404) {
+            alert("User not found");
+            document.getElementById("profile").style.display = "none"; // Hide profile on error
+          } else {
+            alert("Something went wrong!");
+            document.getElementById("profile").style.display = "none"; // Hide profile on error
+          }
+        };
+
+        xhr.onerror = function () {
+          alert("Network error. Please try again.");
+          document.getElementById("profile").style.display = "none"; // Hide profile on error
+        };
+
+        xhr.send();
+      };
+
+      button.addEventListener("click", show);
+    </script>
+  </body>
+</html>
