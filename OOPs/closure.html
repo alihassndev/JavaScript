@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closure</title>
+  </head>
+  <body>
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+  </body>
+
+  <script>
+    // function outer() {
+    //   const name = "ali";
+
+    //   function inner() {
+    //     const lastName = "hassan";
+
+    //     console.log(`${name} ${lastName}`);
+    //   }
+    //   inner();
+    // }
+
+    // outer();
+
+    // ==================================
+    // document.getElementById("orange").onclick = function () {
+    //   document.body.style.background = "orange";
+    // };
+
+    // document.getElementById("green").onclick = function () {
+    //   document.body.style.background = "green";
+    // };
+
+    function clickHandler(color) {
+      //   document.body.style.background = `${color}`;
+
+      return function () {
+        document.body.style.background = `${color}`;
+      };
+    }
+
+    document.getElementById("orange").onclick = clickHandler("orange");
+    document.getElementById("green").onclick = clickHandler("green");
+  </script>
+</html>
